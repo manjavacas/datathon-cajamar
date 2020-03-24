@@ -37,6 +37,4 @@ def preprocess(file: str, train: bool) -> pd.DataFrame:
 	df['min_blue'] = df.loc[:, 'Q_B_2_0_0':'Q_B_2_1_0'].min(axis=1)
 	df['min_nir'] = df.loc[:, 'Q_NIR_8_0_0':'Q_NIR_8_1_0'].min(axis=1)
 
-	df.drop(['X', 'Y'], axis=1, inplace=True)
-
 	return df
