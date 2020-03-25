@@ -6,7 +6,7 @@ import pandas as pd
 
 def preprocess(file: str, train: bool) -> pd.DataFrame:
 	df = pd.read_csv(file, index_col=0, sep='|')
-	df.dropna(inplace=True)
+	df.fillna(method='ffill', inplace=True)
 
 	df['MAXBUILDINGFLOOR'] = df['MAXBUILDINGFLOOR'].astype(np.int64)
 
