@@ -4,6 +4,7 @@ import preprocessing
 
 from joblib import load
 
+import pandas as pd
 
 ESTIMAR_PATH = os.path.join('.', 'data', 'Estimar_UH2020.txt')
 MODEL1 = os.path.join('.', 'models', 'model1.joblib')
