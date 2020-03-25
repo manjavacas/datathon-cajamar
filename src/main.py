@@ -4,7 +4,6 @@ import preprocessing
 
 from joblib import load
 
-import pandas as pd
 
 ESTIMAR_PATH = os.path.join('.', 'data', 'Estimar_UH2020.txt')
 MODEL1 = os.path.join('.', 'models', 'model1.joblib')
@@ -12,6 +11,7 @@ MODEL2 = os.path.join('.', 'models', 'model2.joblib')
 
 CLASES = ['AGRICULTURE', 'INDUSTRIAL', 'OFFICE', 'OTHER', 'PUBLIC', 'RESIDENTIAL', 'RETAIL']
 
+# Características seleccionadas para el primer modelo
 SELECTED_FEATURES_1 = [
   	'mean_red', 'mean_green', 'mean_blue', 'mean_nir',
 
@@ -22,6 +22,7 @@ SELECTED_FEATURES_1 = [
   	'CADASTRALQUALITYID'
 	]
 
+# Características seleccionadas para el segundo modelo
 SELECTED_FEATURES_2 = [
   	'X','Y',
 
@@ -36,6 +37,11 @@ SELECTED_FEATURES_2 = [
 
 
 def model1(df):
+	'''
+	Primer modelo. Clasificador Residencial vs No residencial
+	Input: dataset completo
+	Output: (dataset de residenciales, dataset de no residenciales)
+	'''
 	clf = load(MODEL1)
 	
 	df['RESIDENTIAL_PREDICTED'] = clf.predict(df[SELECTED_FEATURES_1])
@@ -51,6 +57,11 @@ def model1(df):
 
 
 def model2(df):
+	'''
+	Segundo modelo. Clasificador general
+	Input: dataset con instancias predichas como no residenciales
+	Output: dataset de entrada con sus predicciones
+	'''
 	clf = load(MODEL2)
 
 	df['CLASE'] = clf.predict(df[SELECTED_FEATURES_2])
